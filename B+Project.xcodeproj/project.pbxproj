@@ -21,6 +21,7 @@
 		84EA668621C6A0B0003E31D2 /* BaseModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EA668521C6A0B0003E31D2 /* BaseModel.m */; };
 		84EA668921C6A0E0003E31D2 /* LeafModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EA668821C6A0E0003E31D2 /* LeafModel.m */; };
 		84EA668C21C6A326003E31D2 /* MiddleNodeModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EA668B21C6A326003E31D2 /* MiddleNodeModel.m */; };
+		84EA668F21CA72F1003E31D2 /* ResultModel.m in Sources */ = {isa = PBXBuildFile; fileRef = 84EA668E21CA72F1003E31D2 /* ResultModel.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -69,6 +70,8 @@
 		84EA668821C6A0E0003E31D2 /* LeafModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LeafModel.m; sourceTree = "<group>"; };
 		84EA668A21C6A326003E31D2 /* MiddleNodeModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MiddleNodeModel.h; sourceTree = "<group>"; };
 		84EA668B21C6A326003E31D2 /* MiddleNodeModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MiddleNodeModel.m; sourceTree = "<group>"; };
+		84EA668D21CA72F1003E31D2 /* ResultModel.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ResultModel.h; sourceTree = "<group>"; };
+		84EA668E21CA72F1003E31D2 /* ResultModel.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ResultModel.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -182,6 +185,8 @@
 				84EA668821C6A0E0003E31D2 /* LeafModel.m */,
 				84EA668A21C6A326003E31D2 /* MiddleNodeModel.h */,
 				84EA668B21C6A326003E31D2 /* MiddleNodeModel.m */,
+				84EA668D21CA72F1003E31D2 /* ResultModel.h */,
+				84EA668E21CA72F1003E31D2 /* ResultModel.m */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -322,6 +327,7 @@
 				84EA668221C687AB003E31D2 /* BAddTreeManager.m in Sources */,
 				84EA668621C6A0B0003E31D2 /* BaseModel.m in Sources */,
 				84EA665621C634EC003E31D2 /* main.m in Sources */,
+				84EA668F21CA72F1003E31D2 /* ResultModel.m in Sources */,
 				84EA667B21C63515003E31D2 /* SFFileManager.m in Sources */,
 				84EA664821C634EA003E31D2 /* AppDelegate.m in Sources */,
 				84EA668921C6A0E0003E31D2 /* LeafModel.m in Sources */,

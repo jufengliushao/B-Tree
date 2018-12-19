@@ -23,8 +23,11 @@
     for (LeafModel *leaf in arr) {
         [[BAddTreeManager shareInsatance] insertNode:leaf];
     }
+    ResultModel *m = [[BAddTreeManager shareInsatance] searchNodeWithIndex:5];
+    NSLog(@"");
     // Do any additional setup after loading the view, typically from a nib.
 }
+
 
 
 @end

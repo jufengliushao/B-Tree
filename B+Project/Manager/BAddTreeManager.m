@@ -67,6 +67,44 @@ BAddTreeManager *bTreeM = nil;
     }
 }
 
+/**
+ * 对数据进行搜索
+ * index - 查询的下表
+ * return - 查询结果
+ */
+- (ResultModel *)searchNodeWithIndex:(NSInteger)index{
+    NSInteger tagFound= 0;
+    NSInteger num = 0;
+    MiddleNodeModel *node = rootNode;
+    MiddleNodeModel *result;
+    LeafModel *tmp;
+    while (tagFound == 0 && node) {
+        num ++;
+        NSInteger i = 0;
+        i = [self seartchNode:node index:index];
+        result = node.children[i];
+        if (result.keys.count < 2) {
+            // 此节点为叶子节点
+            // 若里面没有数据，则表示，查找不到
+            for (LeafModel *m in result.children) {
+                if (m.index == index) {
+                    tmp = m;
+                    tagFound = 1;
+                    break;
+                }
+            }
+            if (tagFound == 0) {
+                break;
+            }
+        }else{
+            // 当前节点仍为中间索引节点
+            node = result;
+            continue;
+        }
+    }
+    ResultModel *re = [[ResultModel alloc] initWithLeaf:tmp floor:num];
+    return re;
+}
 #pragma mark - private methods
 /**
  * 查找indexc需要插入的节点
