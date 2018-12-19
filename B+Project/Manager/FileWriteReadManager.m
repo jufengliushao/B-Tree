@@ -71,6 +71,21 @@ NSString *fileName = @"Sources.txt";
     return result;
 }
 
+- (NSString *)returnRecords:(LeafModel *)leaf{
+    NSString *result = [NSString stringWithFormat:@"%05ld#%@%@", leaf.index, leaf.a_attribute, @"abcdefg"];
+    return [result substringWithRange:NSMakeRange(0, _dataLength)];
+}
+
+/**
+ * 写入数据
+ */
+- (void)writeLeafData:(LeafModel *)leaf{
+    NSFileHandle *hander = [NSFileHandle fileHandleForWritingAtPath:filePath];
+    [hander seekToEndOfFile];
+    [hander writeData:[[self returnRecords:leaf] dataUsingEncoding:NSUTF8StringEncoding]];
+    [hander closeFile];
+}
+
 /**
  * 读取数据
  */

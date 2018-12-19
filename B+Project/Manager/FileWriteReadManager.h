@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
  * count - 读取数据的行数
  */
 - (__kindof NSArray *)readData:(NSInteger)count;
+
+/**
+ * 写入数据
+ */
+- (void)writeLeafData:(LeafModel *)leaf;
 @end
 
 NS_ASSUME_NONNULL_END

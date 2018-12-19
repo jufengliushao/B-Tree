@@ -19,6 +19,11 @@ NS_ASSUME_NONNULL_BEGIN
 - (void)insertNode:(LeafModel *)model;
 
 /**
+ * b+tree 生成后，进行手动插入
+ */
+- (LeafModel *)insertFileNode:(NSInteger)index msg:(NSString *)msg;
+
+/**
  * 对数据进行搜索
  * index - 查询的下表
  * return - 查询结果

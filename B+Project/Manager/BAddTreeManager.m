@@ -7,7 +7,6 @@
 //
 
 #import "BAddTreeManager.h"
-
 BAddTreeManager *bTreeM = nil;
 
 @interface BAddTreeManager(){
@@ -104,6 +103,15 @@ BAddTreeManager *bTreeM = nil;
     }
     ResultModel *re = [[ResultModel alloc] initWithLeaf:tmp floor:num];
     return re;
+}
+
+/**
+ * b+tree 生成后，进行手动插入
+ */
+- (LeafModel *)insertFileNode:(NSInteger)index msg:(NSString *)msg{
+    LeafModel *model = [[LeafModel alloc] initWithArr:@[@(index), msg]];
+    [self insertNode:model];
+    return model;
 }
 #pragma mark - private methods
 /**
