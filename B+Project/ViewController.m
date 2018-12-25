@@ -26,12 +26,12 @@
     [super viewDidLoad];
     
 //    [[FileWriteReadManager shareInsatance] createFile];
-    NSArray *arr = [[FileWriteReadManager shareInsatance] readData:11];
+    NSArray *arr = [[FileWriteReadManager shareInsatance] readData:4];
     for (LeafModel *leaf in arr) {
         [[BAddTreeManager shareInsatance] insertNode:leaf];
     }
     
-    NSLog(@"");
+    
     // Do any additional setup after loading the view, typically from a nib.
 }
 

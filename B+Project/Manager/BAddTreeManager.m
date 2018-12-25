@@ -52,9 +52,6 @@ BAddTreeManager *bTreeM = nil;
                 [self spliteLeaf:rootNode];
             }
         }else{
-            if (model.index == 25) {
-                NSLog(@"");
-            }
             // 当前根节点为中间索引
             MiddleNodeModel *node = [self searchInsertPoint:model.index];
             [self insertChildLeaf:node leaf:model];
@@ -123,6 +120,7 @@ BAddTreeManager *bTreeM = nil;
  * return - 删除结果
  */
 - (ResultModel *)deleteNodeWithIndex:(NSInteger)index{
+    [self private_deleteIndex:index];
     ResultModel *result = [self searchNodeWithIndex:index];
     result.isFind = [deleteArr containsObject:result.result] ? NO : YES;
     if (result.isFind) {
@@ -132,7 +130,7 @@ BAddTreeManager *bTreeM = nil;
 }
 #pragma mark - private methods
 /**
- * 查找indexc需要插入的节点
+ * 查找indexc需要插入的节点 - 返回的是叶子节点
  * child - leafs
  * index - leaf.index
  */
@@ -419,18 +417,70 @@ BAddTreeManager *bTreeM = nil;
         return;
     }
     
+    MiddleNodeModel *middleNode = [self searchInsertPoint:index]; // 当前的叶子节点
+    if (middleNode.children.count > 1) {
+        // 当前节点数据大于1
+        [self private_deleteLeafWithMoreChild:middleNode index:index];
+    }
+    NSLog(@"");
 }
 
 - (void)private_delete_rootValue:(NSInteger)index{
-    for (LeafModel *leaf in rootNode.children) {
-        if (leaf.index == index) {
-            [rootNode.children removeObject:leaf];
-            break;
-        }
-    }
+    [self private_removeLeafIndex:index array:rootNode.children];
     if (rootNode.children.count == 0) {
         // 如果根节点不保存了叶子节点，置为nil
         rootNode = nil;
+    }
+}
+
+/**
+ * 删除节点的叶子节点不只一个
+ * leafModel - 叶子节点
+ */
+- (void)private_deleteLeafWithMoreChild:(MiddleNodeModel *)leafModel index:(NSInteger)index{
+    NSInteger ind = 0; // 找到当前其在数组中的位置
+    for (ind = 0; index < leafModel.children.count && [leafModel.children[ind] index] != index; ind ++) {
+        
+    }
+    [self private_removeLeafIndex:index array:leafModel.children];
+    if(ind == 0){
+        // 是第一个数
+        NSInteger updateIndex = [leafModel.children.firstObject index];
+        [self private_updateIndex:updateIndex old:index leaf:leafModel];
+    }
+}
+
+/**
+ * 从数据中删除数据
+ */
+- (void)private_removeLeafIndex:(NSInteger)index array:(NSMutableArray *)arr{
+    for (LeafModel *leaf in arr) {
+        if (leaf.index == index) {
+            [arr removeObject:leaf];
+            break;
+        }
+    }
+}
+
+/**
+ * 更新索引
+ * 针对删除操作
+ * newIndex - 新的节点
+ * old - 旧的
+ * leaf - 最底层的叶子节点
+ */
+- (void)private_updateIndex:(NSInteger)newIndex old:(NSInteger)oldIndex leaf:(MiddleNodeModel *)leaf{
+    MiddleNodeModel *parent = leaf;
+    BOOL isFound = 0;
+    while (parent && isFound == 0) {
+        for (NSInteger i = 0; i < parent.keys.count; i ++) {
+            if ([parent.keys[i] integerValue] == oldIndex) {
+                parent.keys[i] = [NSString stringWithFormat:@"%ld", newIndex];
+                isFound = 1;
+                break;
+            }
+        }
+        parent = parent.parent;
     }
 }
 @end
