@@ -29,6 +29,13 @@ NS_ASSUME_NONNULL_BEGIN
  * return - 查询结果
  */
 - (ResultModel *)searchNodeWithIndex:(NSInteger)index;
+
+/**
+ * 对指定索引进行删除
+ * index - 删除的下表
+ * return - 删除结果
+ */
+- (ResultModel *)deleteNodeWithIndex:(NSInteger)index;
 @end
 
 NS_ASSUME_NONNULL_END

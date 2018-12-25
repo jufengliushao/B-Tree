@@ -73,7 +73,8 @@ NSString *fileName = @"Sources.txt";
 
 - (NSString *)returnRecords:(LeafModel *)leaf{
     NSString *result = [NSString stringWithFormat:@"%05ld#%@%@", leaf.index, leaf.a_attribute, @"abcdefg"];
-    return [result substringWithRange:NSMakeRange(0, _dataLength)];
+    result = [result substringWithRange:NSMakeRange(0, _dataLength - 1)];
+    return [NSString stringWithFormat:@"%@\n", result];
 }
 
 /**

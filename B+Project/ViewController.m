@@ -16,6 +16,7 @@
 @property (weak, nonatomic) IBOutlet UITextField *searchtf;
 @property (weak, nonatomic) IBOutlet UITextField *insertIndextf;
 @property (weak, nonatomic) IBOutlet UITextField *insertAttrtf;
+@property (weak, nonatomic) IBOutlet UITextField *deletetf;
 
 @end
 
@@ -65,6 +66,15 @@
     [self showText:@"数据插入成功" delay:3];
 }
 
+- (void)deleteIndex{
+    ResultModel *result = [[BAddTreeManager shareInsatance] deleteNodeWithIndex:[self.deletetf.text integerValue]];
+    if (!result.isFind) {
+        [self showText:[NSString stringWithFormat:@"未找到j索引:%@", self.deletetf.text] delay:2];
+        return;
+    }
+    [self showText:[NSString stringWithFormat:@"删除成功:%@", self.deletetf.text] delay:2];
+}
+
 
 #pragma mark - action
 
@@ -92,6 +102,19 @@
         return;
     }
     [self writeNewData];
+}
+
+- (IBAction)deleteAction:(id)sender {
+    // 删除
+    if (self.deletetf.text.length < 1) {
+        [self showText:@"请输入数据" delay:2];
+        return;
+    }
+    if (![self judgement:self.deletetf.text]) {
+        [self showText:@"请输入正确的数字" delay:2];
+        return;
+    }
+    [self deleteIndex];
 }
 
 @end

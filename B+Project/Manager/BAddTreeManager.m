@@ -12,6 +12,7 @@ BAddTreeManager *bTreeM = nil;
 @interface BAddTreeManager(){
     NSInteger B_ADD_M; // b+ 阶数
     MiddleNodeModel *rootNode; // 根节点
+    NSMutableArray *deleteArr; //
 }
 
 @end
@@ -30,6 +31,7 @@ BAddTreeManager *bTreeM = nil;
 - (instancetype)init{
     if (self = [super init]) {
         B_ADD_M = 3;
+        deleteArr = [NSMutableArray arrayWithCapacity:0];
     }
     return self;
 }
@@ -102,6 +104,7 @@ BAddTreeManager *bTreeM = nil;
         }
     }
     ResultModel *re = [[ResultModel alloc] initWithLeaf:tmp floor:num];
+    re.isFind = [deleteArr containsObject:re.result] ? NO : YES;
     return re;
 }
 
@@ -113,9 +116,24 @@ BAddTreeManager *bTreeM = nil;
     [self insertNode:model];
     return model;
 }
+
+/**
+ * 对指定索引进行删除
+ * index - 删除的下表
+ * return - 删除结果
+ */
+- (ResultModel *)deleteNodeWithIndex:(NSInteger)index{
+    ResultModel *result = [self searchNodeWithIndex:index];
+    result.isFind = [deleteArr containsObject:result.result] ? NO : YES;
+    if (result.isFind) {
+        [self deleteAction_HN:result.result];
+    }
+    return result;
+}
 #pragma mark - private methods
 /**
  * 查找indexc需要插入的节点
+ * child - leafs
  * index - leaf.index
  */
 - (MiddleNodeModel *)searchInsertPoint:(NSInteger)index{
@@ -328,7 +346,6 @@ BAddTreeManager *bTreeM = nil;
     NSInteger index = [second.firstObject integerValue]; // 需要插入父节点的数据
     [self addMiddleValueKey:node first:first second:second firstC:firstC secondeC:secondC index:index];
     // 执行完向上一个中间索引分裂之后，需要对上一个中间索引进行再次检查是否c超过界限
-# warning 未检查
     [self spliteMiddleNode:node.parent];
 }
 
@@ -382,6 +399,38 @@ BAddTreeManager *bTreeM = nil;
     NSLog(@"%@]key", resulte);
     for (MiddleNodeModel *m in middle.children) {
         [self printNodeMiddle:m];
+    }
+}
+
+- (void)deleteAction_HN:(LeafModel *)leaf{
+    [deleteArr addObject:leaf];
+}
+
+- (void)private_deleteIndex:(NSInteger)index{
+    ResultModel *result = [self searchNodeWithIndex:index];
+    if (!result.isFind) {
+        // 没有找到
+        return;
+    }
+    
+    if (rootNode.keys.count < 2) {
+        // 根节点保存的是叶子节点
+        [self private_delete_rootValue:index];
+        return;
+    }
+    
+}
+
+- (void)private_delete_rootValue:(NSInteger)index{
+    for (LeafModel *leaf in rootNode.children) {
+        if (leaf.index == index) {
+            [rootNode.children removeObject:leaf];
+            break;
+        }
+    }
+    if (rootNode.children.count == 0) {
+        // 如果根节点不保存了叶子节点，置为nil
+        rootNode = nil;
     }
 }
 @end

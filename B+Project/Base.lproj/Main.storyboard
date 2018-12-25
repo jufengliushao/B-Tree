@@ -56,28 +56,51 @@
                                     <action selector="insertaction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fiK-Nk-7MU"/>
                                 </connections>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Blo-CJ-j3U">
+                                <rect key="frame" x="64" y="538.5" width="247.5" height="30"/>
+                                <color key="backgroundColor" red="0.20381457820000001" green="0.6302758812" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <state key="normal" title="删除">
+                                    <color key="titleColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                </state>
+                                <connections>
+                                    <action selector="deleteAction:" destination="BYZ-38-t0r" eventType="touchUpInside" id="HXj-ic-r1R"/>
+                                </connections>
+                            </button>
+                            <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="删除：index" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="iwP-LW-La4">
+                                <rect key="frame" x="28" y="352" width="319" height="30"/>
+                                <nil key="textColor"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                <textInputTraits key="textInputTraits"/>
+                            </textField>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="AIL-7d-6c8" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="0HA-aO-NeC"/>
+                            <constraint firstItem="Blo-CJ-j3U" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="2JD-tE-m0M"/>
                             <constraint firstItem="AIL-7d-6c8" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.35" id="4Hc-OS-3Up"/>
                             <constraint firstItem="I21-Sv-oFs" firstAttribute="width" secondItem="ut3-KL-zkD" secondAttribute="width" id="730-Bc-3qH"/>
                             <constraint firstItem="bQh-ZD-jzi" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.5" id="9lY-l6-70i"/>
+                            <constraint firstItem="iwP-LW-La4" firstAttribute="width" secondItem="aST-sQ-eUR" secondAttribute="width" id="DVJ-Y4-Vf1"/>
                             <constraint firstItem="aST-sQ-eUR" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="JYJ-23-Hnz"/>
+                            <constraint firstItem="Blo-CJ-j3U" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.66" id="N85-1i-0Hu"/>
                             <constraint firstItem="I21-Sv-oFs" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Ruo-Ye-V3a"/>
                             <constraint firstItem="aST-sQ-eUR" firstAttribute="width" secondItem="ut3-KL-zkD" secondAttribute="width" id="Tpf-2P-QHV"/>
                             <constraint firstItem="bQh-ZD-jzi" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Wi0-fg-ZIW"/>
                             <constraint firstItem="aST-sQ-eUR" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.88" id="WnW-fB-Iit"/>
                             <constraint firstItem="ut3-KL-zkD" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.45" id="eyd-ld-oTX"/>
+                            <constraint firstItem="Blo-CJ-j3U" firstAttribute="width" secondItem="AIL-7d-6c8" secondAttribute="width" id="fYr-F0-0p9"/>
                             <constraint firstItem="ut3-KL-zkD" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.85" id="h30-Nt-ZSi"/>
+                            <constraint firstItem="iwP-LW-La4" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="1.1" id="jX3-SS-CbV"/>
                             <constraint firstItem="bQh-ZD-jzi" firstAttribute="width" secondItem="AIL-7d-6c8" secondAttribute="width" id="lK0-Jd-p9z"/>
                             <constraint firstItem="I21-Sv-oFs" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" multiplier="0.66" id="nLl-v8-YfY"/>
                             <constraint firstItem="ut3-KL-zkD" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="qB7-IX-R0c"/>
+                            <constraint firstItem="iwP-LW-La4" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="vjc-HQ-pMo"/>
                             <constraint firstItem="AIL-7d-6c8" firstAttribute="width" secondItem="8bC-Xf-vdC" secondAttribute="width" multiplier="0.66" id="zON-Nj-9sH"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
                     <connections>
+                        <outlet property="deletetf" destination="iwP-LW-La4" id="YGy-4F-0Ij"/>
                         <outlet property="insertAttrtf" destination="aST-sQ-eUR" id="RF9-il-mMj"/>
                         <outlet property="insertIndextf" destination="I21-Sv-oFs" id="2AY-LQ-Jy6"/>
                         <outlet property="searchtf" destination="ut3-KL-zkD" id="Hgh-pu-H1I"/>
