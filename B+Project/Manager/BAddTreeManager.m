@@ -101,7 +101,7 @@ BAddTreeManager *bTreeM = nil;
         }
     }
     ResultModel *re = [[ResultModel alloc] initWithLeaf:tmp floor:num];
-    re.isFind = [deleteArr containsObject:re.result] ? NO : YES;
+    re.isFind = re.isFind ? ([deleteArr containsObject:re.result] ? NO : YES) : NO;
     return re;
 }
 
@@ -459,6 +459,40 @@ BAddTreeManager *bTreeM = nil;
  */
 - (void)private_deleteLeafWithOneChild:(MiddleNodeModel *)leafModel index:(NSInteger)index{
     MiddleNodeModel *brother = [self private_delete_returnBortherNode:leafModel]; // 兄弟节点
+    if (brother.children.count > 1) {
+        //  兄弟节点数据大于 1
+        [self private_delete_bortherNodeMore:leafModel brother:brother];
+    }else{
+        // 兄弟节点数据为1
+    }
+}
+
+/**
+ * 删除节点，问兄弟节点借
+ * 兄弟节点不只一个节点
+ * 1. 判断兄弟节点位置
+ * 2. 若为删除节点右兄弟，借第一个数，并将剩下的leaf更新节点 更新两个索引，一个删除，一个借
+ * 3. 若为左兄弟，借最后一个数, 更新一个索引
+ */
+- (void)private_delete_bortherNodeMore:(MiddleNodeModel *)current brother:(MiddleNodeModel *)brother{
+    MiddleNodeModel *parent = current.parent;
+    LeafModel *borrow;
+    NSUInteger current_index = [parent.children indexOfObject:current];
+    NSUInteger brother_index = [parent.children indexOfObject:brother];
+    if (current_index > brother_index) {
+        // 借左兄弟节点
+        borrow = brother.children.lastObject;
+        [brother.children removeLastObject];
+        [self private_updateIndex:borrow.index old:[current.children.firstObject index] leaf:current];
+    }else{
+        // 借右兄弟
+        borrow = brother.children.firstObject;
+        [brother.children removeObject:borrow];
+        [self private_updateIndex:borrow.index old:[current.children.firstObject index] leaf:current];
+        [self private_updateIndex:[brother.children.firstObject index] old:borrow.index leaf:brother];
+    }
+    [current.children removeLastObject];
+    [current.children addObject:borrow];
 }
 
 /**
@@ -522,6 +556,6 @@ BAddTreeManager *bTreeM = nil;
             result = parent.children[index - 1];
         }
     }
-    return parent;
+    return result;
 }
 @end
