@@ -502,9 +502,38 @@ BAddTreeManager *bTreeM = nil;
  * 1.两个进行合并，形成新的节点
  * 2. 将合并前的两个节点从父节点中删除，并将新的节点添加到父节点中，添加位置为合并前，index最小的位置
  * 3. 判断父节点，外部函数返回
+ * 4. 更新节点，根据brother，左兄弟 -> 直接删除源节点的index 右兄弟的index, 右兄弟 -> 删除右节点的索引，同时对删除节点进行索引遍历，跟换成当前节点中第一个leaf的index
+ * 5. 更新节点，当前所删除的节点
  */
 - (void)private_delete_bortherNodeOnly:(MiddleNodeModel *)current brother:(MiddleNodeModel *)brother{
-    
+    MiddleNodeModel *parent = current.parent;
+    NSUInteger current_index = [parent.children indexOfObject:current];
+    NSUInteger brother_index = [parent.children indexOfObject:brother];
+    NSUInteger min_index = MIN(current_index, brother_index);
+    NSInteger updateKey = min_index == current_index ? [brother.children.firstObject index] : [current.children.firstObject index]; // 需要删除的node
+    MiddleNodeModel *newNode = [self createMiddleChildLeaf:@[brother.children.firstObject] parent:parent]; // 新的叶子节点
+    [parent.children removeObject:current];
+    [parent.children removeObject:brother];
+    [parent.children insertObject:newNode atIndex:min_index];
+    MiddleNodeModel *newParent = [self private_delete_middleChanged:parent index:[brother.children.firstObject index]]; // 新的parent
+    newNode.parent = newParent;
+    // 更新索引
+    if (current_index < brother_index) {
+        // 删除的是左子树
+        
+    }else{
+        // 删除的是右子树
+    }
+}
+
+/**
+ * 删除根节点后，对其父节点的合法性判断和处理
+ * midNode - 需要检查的父节点
+ * index - 需要删除的index
+ */
+- (MiddleNodeModel *)private_delete_middleChanged:(MiddleNodeModel *)midNode index:(NSInteger)index{
+    MiddleNodeModel *result;
+    return result;
 }
 
 /**
