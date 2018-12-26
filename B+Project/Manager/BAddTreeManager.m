@@ -421,6 +421,9 @@ BAddTreeManager *bTreeM = nil;
     if (middleNode.children.count > 1) {
         // 当前节点数据大于1
         [self private_deleteLeafWithMoreChild:middleNode index:index];
+    }else{
+        // 当前叶子节点只有1个数据
+        [self private_deleteLeafWithOneChild:middleNode index:index];
     }
     NSLog(@"");
 }
@@ -448,6 +451,14 @@ BAddTreeManager *bTreeM = nil;
         NSInteger updateIndex = [leafModel.children.firstObject index];
         [self private_updateIndex:updateIndex old:index leaf:leafModel];
     }
+}
+
+/**
+ * 删除节点的叶子节点只有一个
+ * leafModel - 叶子节点
+ */
+- (void)private_deleteLeafWithOneChild:(MiddleNodeModel *)leafModel index:(NSInteger)index{
+    MiddleNodeModel *brother = [self private_delete_returnBortherNode:leafModel]; // 兄弟节点
 }
 
 /**
@@ -482,5 +493,35 @@ BAddTreeManager *bTreeM = nil;
         }
         parent = parent.parent;
     }
+}
+
+/**
+ * 返回当前节点的兄弟节点
+ * 0 -> 1
+ * 1 -> 0, 2 返回较多数据的节点 若一样，返回0
+ * 2 -> 1, 3 返回较多数据的节点 若一样，返回1
+ * 3 -> 2
+ */
+- (MiddleNodeModel *)private_delete_returnBortherNode:(MiddleNodeModel *)node{
+    MiddleNodeModel *parent = node.parent;
+    MiddleNodeModel *result;
+    NSInteger index = 0;
+    for (index = 0; index < parent.children.count && parent.children[index] != node; index ++) {
+        
+    }
+    if (index == 0) {
+        result = parent.children[1];
+    }else if (index == 3){
+        result = parent.children[2];
+    }else{
+        // 中间节点 1, 2
+        if (parent.children.count > index) {
+            // 当前节点有三个兄弟
+            result = [parent.children[index - 1] count] < [parent.children[index + 1] count] ? parent.children[index + 1] : parent.children[index - 1];
+        }else{
+            result = parent.children[index - 1];
+        }
+    }
+    return parent;
 }
 @end
