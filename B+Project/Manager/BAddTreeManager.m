@@ -510,26 +510,25 @@ BAddTreeManager *bTreeM = nil;
     NSUInteger current_index = [parent.children indexOfObject:current];
     NSUInteger brother_index = [parent.children indexOfObject:brother];
     NSUInteger min_index = MIN(current_index, brother_index);
-    NSInteger updateKey = min_index == current_index ? [brother.children.firstObject index] : [current.children.firstObject index]; // 需要删除的node
+//    NSInteger updateKey = min_index == current_index ? [brother.children.firstObject index] : [current.children.firstObject index]; // 需要删除的node
     MiddleNodeModel *newNode = [self createMiddleChildLeaf:@[brother.children.firstObject] parent:parent]; // 新的叶子节点
     [parent.children removeObject:current];
     [parent.children removeObject:brother];
     [parent.children insertObject:newNode atIndex:min_index];
-    MiddleNodeModel *newParent = [self private_delete_middleChanged:parent index:[brother.children.firstObject index]]; // 新的parent
-    newNode.parent = newParent;
     // 更新索引
     if (current_index < brother_index) {
         // 删除的是左子树
-        
-    }else{
-        // 删除的是右子树
+        [self private_updateIndex:[parent.children.firstObject index] old:[current.children.firstObject index] leaf:current];
     }
+    MiddleNodeModel *newParent = [self private_delete_middleChanged:parent index:[brother.children.firstObject index]]; // 新的parent
+    newNode.parent = newParent;
 }
 
 /**
  * 删除根节点后，对其父节点的合法性判断和处理
  * midNode - 需要检查的父节点
  * index - 需要删除的index
+ * return - 删除index，并且经过调整的索引节点
  */
 - (MiddleNodeModel *)private_delete_middleChanged:(MiddleNodeModel *)midNode index:(NSInteger)index{
     MiddleNodeModel *result;
