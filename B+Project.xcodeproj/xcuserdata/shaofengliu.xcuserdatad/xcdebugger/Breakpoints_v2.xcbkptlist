@@ -20,11 +20,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "B+Project/Manager/BAddTreeManager.m"
-            timestampString = "567521043.148003"
+            timestampString = "567531591.637646"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "464"
-            endingLineNumber = "464"
+            startingLineNumber = "467"
+            endingLineNumber = "467"
             landmarkName = "-private_deleteLeafWithOneChild:index:"
             landmarkType = "7">
          </BreakpointContent>
@@ -36,12 +36,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "B+Project/Manager/BAddTreeManager.m"
-            timestampString = "567521043.148538"
+            timestampString = "567532185.558435"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "482"
-            endingLineNumber = "482"
-            landmarkName = "-private_delete_bortherNodeMore:brother:"
+            startingLineNumber = "507"
+            endingLineNumber = "507"
+            landmarkName = "-private_delete_bortherNodeOnly:brother:"
             landmarkType = "7">
          </BreakpointContent>
       </BreakpointProxy>

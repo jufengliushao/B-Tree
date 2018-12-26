@@ -464,6 +464,7 @@ BAddTreeManager *bTreeM = nil;
         [self private_delete_bortherNodeMore:leafModel brother:brother];
     }else{
         // 兄弟节点数据为1
+        
     }
 }
 
@@ -493,6 +494,17 @@ BAddTreeManager *bTreeM = nil;
     }
     [current.children removeLastObject];
     [current.children addObject:borrow];
+}
+
+/**
+ * 删除节点，问兄弟节点借
+ * 兄弟节点只有一个节点
+ * 1.两个进行合并，形成新的节点
+ * 2. 将合并前的两个节点从父节点中删除，并将新的节点添加到父节点中，添加位置为合并前，index最小的位置
+ * 3. 判断父节点，外部函数返回
+ */
+- (void)private_delete_bortherNodeOnly:(MiddleNodeModel *)current brother:(MiddleNodeModel *)brother{
+    
 }
 
 /**
